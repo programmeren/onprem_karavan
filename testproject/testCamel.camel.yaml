@@ -15,6 +15,14 @@
       parameters:
         name: test
       steps:
+        - setBody:
+            id: setBody7533
+            expression:
+              constant:
+                id: constant7ada
+                expression: "{\"test\":\"eren\"}"
         - log:
             id: log5108
             message: body
+            loggingLevel: INFO
+            logName: result
