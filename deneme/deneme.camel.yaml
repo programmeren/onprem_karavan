@@ -1,0 +1,21 @@
+- rest:
+    id: rest-471c
+    path: /test
+    get:
+      - id: get-9596
+        path: /eren
+        to: direct:denemeStart
+- route:
+    id: route-ebd3
+    nodePrefixId: route-164
+    from:
+      id: from-5bb7
+      uri: direct
+      parameters:
+        name: denemeStart
+      steps:
+        - log:
+            id: log-ed8c
+            message: ${body}
+            loggingLevel: INFO
+            logName: result
