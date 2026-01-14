@@ -1,0 +1,15 @@
+- route:
+    id: route-direct-eren
+    description: Direct Eren
+    nodePrefixId: route-direct-eren
+    from:
+      id: from06ff
+      uri: direct
+      parameters:
+        name: eren
+      steps:
+        - log:
+            id: log170e
+            message: body
+            loggingLevel: INFO
+            logName: eren
