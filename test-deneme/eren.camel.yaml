@@ -1,10 +1,3 @@
-- rest:
-    id: rest978a
-    path: /test
-    get:
-      - id: get0786
-        path: eren
-        to: direct:eren
 - route:
     id: route-direct-eren
     description: Direct Eren
@@ -26,3 +19,10 @@
             message: body
             loggingLevel: INFO
             logName: eren
+- rest:
+    id: rest10b4
+    path: /test
+    get:
+      - id: get1475
+        path: eren
+        to: direct:eren
