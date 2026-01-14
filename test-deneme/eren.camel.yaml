@@ -1,6 +1,9 @@
 - rest:
     id: rest978a
     path: /test
+    consumes: application/json
+    produces: application/json
+    bindingMode: auto
     get:
       - id: get0786
         path: eren
