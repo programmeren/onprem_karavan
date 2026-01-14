@@ -1,0 +1,19 @@
+- route:
+    id: route-service-test
+    description: Service /Test
+    nodePrefixId: route-service-test
+    from:
+      id: from5dd5
+      uri: service
+      parameters:
+        delegateUri: /test
+      steps:
+        - setBody:
+            id: setBodyeb4a
+            expression:
+              constant:
+                id: constantc1fe
+                expression: "{\"result\":\"service ok\"}"
+        - log:
+            id: log6721
+            message: body
