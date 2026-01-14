@@ -1,0 +1,20 @@
+- rest:
+    id: restc8df
+    path: /test
+    get:
+      - id: getf74c
+        path: eren
+        to: direct:test
+- route:
+    id: route-direct-test
+    description: Direct Test
+    nodePrefixId: route-direct-test
+    from:
+      id: from2cef
+      uri: direct
+      parameters:
+        name: test
+      steps:
+        - log:
+            id: log5108
+            message: body
