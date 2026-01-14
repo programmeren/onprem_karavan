@@ -1,7 +1,7 @@
 services:
   test-deneme:
     container_name: test-deneme
-    image: registry:5555/karavan/test-deneme:latest
+    image: localhost:5000/karavan/test-deneme:latest
     restart: always
     ports:
       - "8082:8080"
