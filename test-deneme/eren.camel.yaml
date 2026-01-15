@@ -1,19 +1,25 @@
+- restConfiguration:
+    component: platform-http
+    contextPath: /
+    bindingMode: off
+
+- rest:
+    id: rest-test
+    path: test
+    get:
+      - id: get-eren
+        path: eren
+        produces: application/json
+        to: "direct:eren"
+
 - route:
-    id: route-service-test
-    description: Service /Test
-    nodePrefixId: route-service-test
+    id: route-direct-eren
     from:
-      id: from5dd5
-      uri: service
-      parameters:
-        delegateUri: /test
-      steps:
-        - setBody:
-            id: setBodyeb4a
-            expression:
-              constant:
-                id: constantc1fe
-                expression: "{\"result\":\"service ok\"}"
-        - log:
-            id: log6721
-            message: body
+      uri: "direct:eren"
+    steps:
+      - setHeader:
+          name: Content-Type
+          constant: application/json
+      - setBody:
+          constant: |
+            {"status":"OK","message":"Hello Eren from REST DSL"}
