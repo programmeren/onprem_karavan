@@ -1,26 +1,27 @@
 - route:
-    id: get-user-by-id-route
+    id: routefa22
+    nodePrefixId: route320
     from:
-      uri: "platform-http:/api/users/{id}"
+      id: from3ac3
+      uri: direct
       parameters:
-        httpMethodRestrict: GET
+        name: startUser
       steps:
+        - setBody:
+            id: setBody6143
+            expression:
+              constant:
+                id: constantd008
+                expression: "{\"result\":\"Success\"}"
         - log:
-            message: "Fetching user with ID: ${header.id}"
-        - choice:
-            when:
-              - simple: "${header.id} == '1'"
-                steps:
-                  - setBody:
-                      constant: '{"id": 1, "name": "John Doe"}'
-              - simple: "${header.id} == '2'"
-                steps:
-                  - setBody:
-                      constant: '{"id": 2, "name": "Jane Smith"}'
-            otherwise:
-              steps:
-                - setHeader:
-                    name: CamelHttpResponseCode
-                    constant: 404
-                - setBody:
-                    constant: '{"error": "User not found"}'
+            id: log4a3d
+            message: body
+            loggingLevel: INFO
+            logName: logResult
+- rest:
+    id: rest13ff
+    path: api
+    get:
+      - id: getb5fe
+        path: user
+        to: direct:startUser
