@@ -1,25 +1,27 @@
-- restConfiguration:
-    component: platform-http
-    contextPath: /
-    bindingMode: off
-
+- route:
+    id: route4544
+    nodePrefixId: routefd6
+    from:
+      id: fromd4df
+      uri: direct
+      parameters:
+        name: start
+      steps:
+        - setBody:
+            id: setBody33c2
+            expression:
+              constant:
+                id: constant9f3a
+                expression: "{\"result\":\"success\"}"
+        - log:
+            id: log0ea1
+            message: body
+            loggingLevel: INFO
+            logName: logResult
 - rest:
-    id: rest-test
+    id: rest8eb8
     path: test
     get:
-      - id: get-eren
+      - id: get427e
         path: eren
-        produces: application/json
-        to: "direct:eren"
-
-- route:
-    id: route-direct-eren
-    from:
-      uri: "direct:eren"
-    steps:
-      - setHeader:
-          name: Content-Type
-          constant: application/json
-      - setBody:
-          constant: |
-            {"status":"OK","message":"Hello Eren from REST DSL"}
+        to: direct:eren
