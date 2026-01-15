@@ -1,29 +1,4 @@
-- rest:
-    id: rest8eb8
-    path: test
-    consumes: application/json
-    bindingMode: auto
-    get:
-      - id: getd7e8
-        path: test
-        to: direct:start
-- route:
-    id: route4544
-    nodePrefixId: routefd6
-    from:
-      id: fromd4df
-      uri: direct
-      parameters:
-        name: start
-      steps:
-        - setBody:
-            id: setBody33c2
-            expression:
-              constant:
-                id: constant9f3a
-                expression: "{\"result\":\"success\"}"
-        - log:
-            id: log0ea1
-            message: body
-            loggingLevel: INFO
-            logName: logResult
+- restConfiguration:
+    component: platform-http
+    contextPath: /
+    bindingMode: "off"
