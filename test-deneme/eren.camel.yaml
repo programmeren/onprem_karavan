@@ -1,4 +1,48 @@
-- restConfiguration:
-    component: platform-http
-    contextPath: /
-    bindingMode: "off"
+- route:
+    id: get-user-by-id-route
+    from:
+      id: from6407
+      uri: platform-http
+      parameters:
+        httpMethodRestrict: GET
+        path: /api/users/{id}
+      steps:
+        - log:
+            id: log90cb
+            message: "Fetching user with ID: ${header.id}"
+        - choice:
+            id: choice353a
+            when:
+              - id: when5cdf
+                expression:
+                  simple:
+                    id: simple28a6
+                    expression: ${header.id} == '1'
+                steps:
+                  - setBody:
+                      id: setBodyb448
+                      expression:
+                        constant:
+                          id: constantb9ce
+                          expression: "{\"id\": 1, \"name\": \"John Doe\"}"
+              - id: when807a
+                expression:
+                  simple:
+                    id: simplee01a
+                    expression: ${header.id} == '2'
+                steps:
+                  - setBody:
+                      id: setBody8ebc
+                      expression:
+                        constant:
+                          id: constant8fa4
+                          expression: "{\"id\": 2, \"name\": \"Jane Smith\"}"
+            otherwise:
+              id: otherwiseb35f
+              steps:
+                - setBody:
+                    id: setBodyb758
+                    expression:
+                      constant:
+                        id: constantaa59
+                        expression: "{\"error\": \"User not found\"}"
