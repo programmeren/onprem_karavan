@@ -4,11 +4,9 @@
     consumes: application/json
     bindingMode: auto
     get:
-      - id: get427e
-        path: eren
+      - id: getd7e8
+        path: test
         to: direct:start
-        consumes: application/json
-        bindingMode: json
 - route:
     id: route4544
     nodePrefixId: routefd6
