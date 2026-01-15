@@ -1,3 +1,14 @@
+- rest:
+    id: rest8eb8
+    path: test
+    consumes: application/json
+    bindingMode: auto
+    get:
+      - id: get427e
+        path: eren
+        to: direct:start
+        consumes: application/json
+        bindingMode: json
 - route:
     id: route4544
     nodePrefixId: routefd6
@@ -18,10 +29,3 @@
             message: body
             loggingLevel: INFO
             logName: logResult
-- rest:
-    id: rest8eb8
-    path: test
-    get:
-      - id: get427e
-        path: eren
-        to: direct:eren
