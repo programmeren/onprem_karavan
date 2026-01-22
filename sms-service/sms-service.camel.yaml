@@ -7,8 +7,7 @@
         path: /SmsService.svc?httpMethodRestrict=POST
       steps:
         - convertBodyTo:
-            id: convertBodyTo5d32
-            description: convertBodyTo
+            id: convertBodyTo6585
             type: java.lang.String
         - setHeader:
             id: setHeadera745
@@ -26,6 +25,7 @@
               simple:
                 id: simpled4f4
                 expression: ${body}
+                resultType: java.lang.String
         - log:
             id: log9feb
             description: xmlInboundBodyLog
@@ -33,17 +33,20 @@
             loggingLevel: INFO
             logName: xmlBody
         - setProperty:
-            id: setProperty727d
+            id: setPropertyd067
+            description: SP-SmsTo
             name: smsTo
             expression:
               xpath:
                 id: xpath7386
                 expression: //SmsRequest/To/text()
                 resultType: java.lang.String
+                trim: false
         - log:
-            id: log-c518
-            message: "SMS To: \"${exchangeProperty.smsTo}\""
+            id: log65df
+            message: "{exchangeProperty.smsTo}"
             loggingLevel: INFO
+            logName: xxxxx
         - setProperty:
             id: setPropertya304
             name: smsText
@@ -67,7 +70,7 @@
                               "sender": "ServiceSMS",
                               "destinations": [
                                   {
-                                      "to": "905327907111"
+                                      "to": "{exchangeProperty.smsTo}"
                                   }
                               ],
                               "content": {
