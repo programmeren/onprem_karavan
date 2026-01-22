@@ -6,6 +6,10 @@
       parameters:
         path: /SmsService.svc?httpMethodRestrict=POST
       steps:
+        - convertBodyTo:
+            id: convertBodyTo5d32
+            description: convertBodyTo
+            type: java.lang.String
         - setHeader:
             id: setHeadera745
             description: SH-Content-Type
@@ -22,38 +26,61 @@
               simple:
                 id: simpled4f4
                 expression: ${body}
-        - setHeader:
-            id: setHeader3475
-            description: SH-smsTo
+        - log:
+            id: log9feb
+            description: xmlInboundBodyLog
+            message: body
+            loggingLevel: INFO
+            logName: xmlBody
+        - setProperty:
+            id: setProperty727d
             name: smsTo
             expression:
               xpath:
-                id: xpath1cb8
-                expression: /SmsRequest/To/text()
-        - setHeader:
-            id: setHeader9c37
-            description: SH-smsText
+                id: xpath7386
+                expression: //SmsRequest/To/text()
+                resultType: java.lang.String
+        - log:
+            id: log-c518
+            message: "SMS To: \"${exchangeProperty.smsTo}\""
+            loggingLevel: INFO
+        - setProperty:
+            id: setPropertya304
             name: smsText
             expression:
               xpath:
-                id: xpathd52e
+                id: xpath8111
                 expression: /SmsRequest/Text/text()
+        - removeHeaders:
+            id: removeHeaders1653
+            pattern: "*"
         - setBody:
             id: setBodyb486
             description: smsRequestBody
             expression:
               simple:
                 id: simpleca89
-                expression: |
+                expression: |-
                   {
-                               "messages":[
-                                 {
-                                   "sender":"ServiceSMS",
-                                   "destinations":[{"to":"${header.smsTo}"}],
-                                   "content":{"text":"${header.smsText}"}
-                                 }
-                               ]
-                             }
+                      "messages": [
+                          {
+                              "sender": "ServiceSMS",
+                              "destinations": [
+                                  {
+                                      "to": "905327907111"
+                                  }
+                              ],
+                              "content": {
+                                  "text": "deneme"
+                              }
+                          }
+                      ]
+                  }
+        - log:
+            id: logd47a
+            message: body
+            loggingLevel: INFO
+            logName: RequestBody
         - setHeader:
             id: setHeader7ff0
             description: SH-Authorization
@@ -71,10 +98,11 @@
                 id: constantcf15
                 expression: application/json
         - to:
-            id: to82fc
-            uri: http
+            id: to93a8
+            uri: https
             parameters:
               httpUri: https://{{infobip.baseUrl}}/sms/3/messages
+              bridgeEndpoint: false
         - setHeader:
             id: setHeader8715
             description: SH-Content-Type
