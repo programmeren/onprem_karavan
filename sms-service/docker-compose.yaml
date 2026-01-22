@@ -1,0 +1,8 @@
+services:
+  sms-service:
+    image: sms-service
+    restart: always
+    ports:
+      - "8085:8080"
+    networks:
+      - karavan
