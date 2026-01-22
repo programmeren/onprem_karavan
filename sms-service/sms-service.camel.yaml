@@ -65,33 +65,16 @@
                 id: simpleca89
                 expression: |-
                   {
-                      "messages": [
-                          {
-                              "sender": "ServiceSMS",
-                              "destinations": [
-                                  {
-                                      "to": "{exchangeProperty.smsTo}"
-                                  }
-                              ],
-                              "content": {
-                                  "text": "deneme"
-                              }
-                          }
-                      ]
+                    "phoneNumber": "${exchangeProperty.smsTo}",
+                    "message": "${exchangeProperty.smsText}",
+                    "messageType": "N",
+                    "recipientType": "B"
                   }
         - log:
             id: logd47a
             message: body
             loggingLevel: INFO
             logName: RequestBody
-        - setHeader:
-            id: setHeader7ff0
-            description: SH-Authorization
-            name: Authorization
-            expression:
-              simple:
-                id: simple5c94
-                expression: App {{infobip.apiKey}}
         - setHeader:
             id: setHeader1565
             description: SH-Content-Type
@@ -101,11 +84,11 @@
                 id: constantcf15
                 expression: application/json
         - to:
-            id: to93a8
-            uri: https
+            id: to4e64
+            uri: http
             parameters:
-              httpUri: https://{{infobip.baseUrl}}/sms/3/messages
-              bridgeEndpoint: false
+              httpUri: http://{{infobip.baseUrl}}/api/sms/send
+              httpMethod: POST
         - setHeader:
             id: setHeader8715
             description: SH-Content-Type
@@ -113,7 +96,7 @@
             expression:
               constant:
                 id: constantba0c
-                expression: text/xml; charset=UTF-8
+                expression: application/json
         - setBody:
             id: setBody4005
             expression:
