@@ -40,19 +40,20 @@
                 expression: ${xpath:/SmsRequest/Text/text()}
         - setBody:
             id: setBodyb486
+            description: smsRequestBody
             expression:
               simple:
                 id: simpleca89
-                expression: |2-
-                   {
-                                "messages":[
-                                  {
-                                    "sender":"ServiceSMS",
-                                    "destinations":[{"to":"${header.smsTo}"}],
-                                    "content":{"text":"${header.smsText}"}
-                                  }
-                                ]
-                              }
+                expression: |
+                  {
+                               "messages":[
+                                 {
+                                   "sender":"ServiceSMS",
+                                   "destinations":[{"to":"${header.smsTo}"}],
+                                   "content":{"text":"${header.smsText}"}
+                                 }
+                               ]
+                             }
         - setHeader:
             id: setHeader7ff0
             description: SH-Authorization
@@ -69,5 +70,26 @@
               constant:
                 id: constantcf15
                 expression: application/json
-        -to:
-            uri: "https://{{infobip.baseUrl}}/sms/3/messages"
+        - to:
+            id: to82fc
+            uri: http
+            parameters:
+              httpUri: https://{{infobip.baseUrl}}/sms/3/messages
+        - setHeader:
+            id: setHeader8715
+            description: SH-Content-Type
+            name: Content-Type
+            expression:
+              constant:
+                id: constantba0c
+                expression: text/xml; charset=UTF-8
+        - setBody:
+            id: setBody4005
+            expression:
+              simple:
+                id: simple3830
+                expression: |-
+                  <SmsResponse>
+                                <Status>OK</Status>
+                                <To>${header.smsTo}</To>
+                              </SmsResponse>
