@@ -1,1 +1,24 @@
-[]
+- route:
+    id: sms-svc
+    from:
+      id: from3ccf
+      uri: platform-http
+      parameters:
+        path: /SmsService.svc?httpMethodRestrict=POST
+      steps:
+        - setHeader:
+            id: setHeadera745
+            description: SH-Content-Type
+            name: Content-Type
+            expression:
+              constant:
+                id: constant8bed
+                expression: text/xml; charset=UTF-8
+        - setProperty:
+            id: setProperty97de
+            description: SP-rawXml
+            name: rawXml
+            expression:
+              simple:
+                id: simpled4f4
+                expression: ${body}
