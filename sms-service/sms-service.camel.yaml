@@ -27,17 +27,17 @@
             description: SH-smsTo
             name: smsTo
             expression:
-              simple:
-                id: simple84d0
-                expression: ${xpath:/SmsRequest/To/text()}
+              xpath:
+                id: xpath1cb8
+                expression: /SmsRequest/To/text()
         - setHeader:
             id: setHeader9c37
             description: SH-smsText
             name: smsText
             expression:
-              simple:
-                id: simple0a3a
-                expression: ${xpath:/SmsRequest/Text/text()}
+              xpath:
+                id: xpathd52e
+                expression: /SmsRequest/Text/text()
         - setBody:
             id: setBodyb486
             description: smsRequestBody
